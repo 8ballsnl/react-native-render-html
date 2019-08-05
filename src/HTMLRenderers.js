@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, Platform } from 'react-native';
+import { TouchableOpacity, Text, View, Platform, Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
@@ -17,6 +17,18 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
         onLinkPress(evt, htmlAttribs.href, htmlAttribs) :
         undefined;
+
+    if(htmlAttribs && htmlAttribs.class && htmlAttribs.class == 'twitter-timeline') {
+        const profile = htmlAttribs.href.split("/");
+
+        if(profile.length) {
+            return (<WebView 
+                source={{html : '<a class="twitter-timeline" href="' + htmlAttribs.href + '">Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'}}
+                key={htmlAttribs.href}
+                scalesPageToFit={true}
+                style={{ width: Dimensions.get('window').width, height: 600 }} />);
+        }
+    }
 
     if (parentWrapper === 'Text') {
         return (
