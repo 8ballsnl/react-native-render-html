@@ -26,6 +26,7 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
                 source={{html : '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><a class="twitter-timeline" href="' + htmlAttribs.href + '">Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'}}
                 key={htmlAttribs.href}
                 scalesPageToFit={true}        
+                startInLoadingState={true}
                 onShouldStartLoadWithRequest={event => {
                     if (!/^[data:text, about:blank]/.test(event.url) && event.url.indexOf('syndication.twitter.com') == -1 && event.url.indexOf('platform.twitter.com') == -1) {
                         Linking.openURL(event.url)
