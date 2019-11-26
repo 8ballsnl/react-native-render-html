@@ -247,6 +247,10 @@ export default class HTML extends PureComponent {
         const { ignoreNodesFunction, ignoredTags, alterNode, alterData, alterChildren, tagsStyles, classesStyles } = props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
             let { children, data } = node;
+            if(node.name=='blockquote'){
+                node.innerHTML = htmlparser2.DomUtils.getOuterHTML(node);
+           }
+
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
                 return false;
             }
