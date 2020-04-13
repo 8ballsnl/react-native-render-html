@@ -13,7 +13,7 @@ import {
     PREFORMATTED_TAGS
 } from './HTMLUtils';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
-import { DomHandler, Parser } from 'htmlparser2';
+import { DomHandler, Parser, DomUtils } from 'htmlparser2';
 import * as HTMLRenderers from './HTMLRenderers';
 
 export default class HTML extends PureComponent {
@@ -240,7 +240,7 @@ export default class HTML extends PureComponent {
         let RNElements = DOMNodes.map((node, nodeIndex) => {
             let { children, data } = node;
             if(node.name=='blockquote'){
-                node.innerHTML = htmlparser2.DomUtils.getOuterHTML(node);
+                node.innerHTML = DomUtils.getOuterHTML(node);
            }
 
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
